@@ -20,10 +20,12 @@ exports.handler = async () => {
 
       if (!idMatch || !textMatch) continue;
 
-      let texto = textMatch[1]
-        .replace(/<br\s*\/?>/g, "\n")
-        .replace(/<[^>]*>/g, "")
-        .trim();
+     let texto = textMatch[1]
+      .replace(/<br\s*\/?>/g, "\n")
+      .replace(/<[^>]*>/g, "")
+      .replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "") // 👈 ELIMINA DUPLICADO
+      .replace(/NUEVA ACTIVIDAD/gi, "") // fallback
+      .trim();
 
       mensajes.push({
         id: idMatch[1],
