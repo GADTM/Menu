@@ -19,7 +19,7 @@ exports.handler = async () => {
       const idMatch = bloque.match(new RegExp(`data-post="${canal}\/(\\d+)"`));
       const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
       const linkMatch = bloque.match(/href="(https:\/\/t\.me\/[^"]+)"/);
-
+	  const dateMatch = bloque.match(/datetime="([^"]+)"/);
       if (!idMatch || !textMatch) continue;
 
       let texto = textMatch[1]
@@ -35,6 +35,7 @@ exports.handler = async () => {
         canal,
         id: idMatch[1],
         texto,
+		fecha: dateMatch ? dateMatch[1] : "",
         link: linkMatch ? linkMatch[1] : null
       });
     }

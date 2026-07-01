@@ -14,11 +14,11 @@ exports.handler = async () => {
 
     for (const bloque of bloques) {
 
-      const idMatch = bloque.match(/data-post="HamRadioQSO\/(\d+)"/);
-      const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
-      const linkMatch = bloque.match(/href="(https:\/\/t\.me\/HamRadioQSO\/\d+)"/);
-
-      if (!idMatch || !textMatch) continue;
+		const idMatch = bloque.match(/data-post="HamRadioQSO\/(\d+)"/);
+		const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
+		const linkMatch = bloque.match(/href="(https:\/\/t\.me\/HamRadioQSO\/\d+)"/);
+		const dateMatch = bloque.match(/datetime="([^"]+)"/);
+		if (!idMatch || !textMatch) continue;
 
     let texto = textMatch[1]
   .replace(/<br\s*\/?>/g, "\n")
@@ -32,6 +32,7 @@ exports.handler = async () => {
       mensajes.push({
         id: idMatch[1],
         texto,
+		fecha: dateMatch ? dateMatch[1] : "",
         link: linkMatch ? linkMatch[1] : null
       });
     }
