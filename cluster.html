@@ -6,41 +6,68 @@
 
 <style>
 body{
-  font-family: Arial;
+  font-family: sans-serif;
+  background: linear-gradient(0deg, #b7d5e8, #eaf4fb);
   margin:0;
-  background:#eaf4fb;
 }
 
 header{
-  background:#3692E3;
-  color:white;
-  padding:20px;
+  background: linear-gradient(0deg, rgba(183,213,232,1) 0%, rgba(54,146,227,1) 100%);
+  color:black;
+  padding:25px;
   text-align:center;
+  font-size:28px;   /* 👈 TITULO MÁS GRANDE */
+  font-weight:bold;
+  box-shadow:0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* BOTONES */
 button{
-  background:#28a745;
+  background:#3692E3;
   color:white;
   border:none;
   padding:12px 20px;
-  margin:15px;
-  border-radius:8px;
+  margin:15px 10px;
+  border-radius:6px;
   cursor:pointer;
   font-size:16px;
+  font-weight:bold;
+  transition:0.3s;
 }
 
+button:hover{
+  background:#004c99;
+  transform:scale(1.05);
+}
+
+/* CONTENEDOR */
 .container{
   max-width:900px;
   margin:auto;
 }
 
+/* TARJETAS */
 .card{
   background:white;
   padding:15px;
   margin:15px;
   border-radius:10px;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
-  white-space: pre-line;
+  white-space:pre-line;
+  font-size:15px;
+}
+
+/* LINK */
+.card a{
+  display:inline-block;
+  margin-top:10px;
+  color:#007bff;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.card a:hover{
+  text-decoration:underline;
 }
 </style>
 </head>
@@ -48,7 +75,10 @@ button{
 <body>
 
 <header>
-  📡 CLUSTER RMDV
+  📡 CLUSTER GADTM<br>
+  <span style="font-size:14px;font-weight:normal;">
+    Actividades desde el canal HamRadioQSO
+  </span>
 </header>
 
 <div style="text-align:center">
