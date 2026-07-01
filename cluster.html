@@ -115,8 +115,12 @@ button:hover{
 <script>
 async function cargar(){
 
-  const res = await fetch("/.netlify/functions/telegram");
-  const data = await res.json();
+  const [r1, r2] = await Promise.all([
+    fetch("/.netlify/functions/telegram").then(r => r.json()),
+    fetch("/.netlify/functions/telegram2").then(r => r.json())
+  ]);
+
+  const data = [...r1, ...r2];
 
   const cont = document.getElementById("lista");
   cont.innerHTML = "";
@@ -127,12 +131,14 @@ async function cargar(){
     div.className = "card";
 
     div.innerHTML = `
-	<div style="font-weight:bold; font-size:18px; margin-bottom:8px;">
-	📡 Actividad
-	</div>
-	<div>${m.texto}</div>
-	<a href="${m.link}" target="_blank">🔗 Ver en Telegram</a>
-	`;
+<div style="font-weight:bold; font-size:18px; margin-bottom:8px;">
+📡 Actividad
+</div>
+
+<div>${m.texto}</div>
+
+<a href="${m.link}" target="_blank">🔗 Ver en Telegram</a>
+`;
 
     cont.appendChild(div);
   });
