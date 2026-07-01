@@ -132,15 +132,12 @@ async function cargar(){
     div.className = "card";
 
     div.innerHTML = `
-<div style="font-weight:bold; font-size:16px; margin-bottom:4px;">
+<div style="font-weight:bold; font-size:18px; margin-bottom:2px;">
 📡 Actividad
 </div>
-
 <div>${m.texto}</div>
-
 <a href="${m.link}" target="_blank">🔗 Ver en Telegram</a>
 `;
-
     cont.appendChild(div);
   });
 }
