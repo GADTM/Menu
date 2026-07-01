@@ -69,6 +69,15 @@ button:hover{
 .card a:hover{
   text-decoration:underline;
 }
+
+.actions{
+  text-align:center;
+  margin:15px;
+}
+
+.actions button{
+  margin:5px;
+}
 </style>
 </head>
 
@@ -82,6 +91,7 @@ button:hover{
 </header>
 
 <div style="text-align:center">
+<div class="actions">
   <button onclick="window.location.href='https://gadtm.netlify.app/'">
     🏠 Menú principal
   </button>
@@ -93,6 +103,7 @@ button:hover{
   <button onclick="cargar()">
     🔄 Actualizar
   </button>
+
 </div>
 
 <div class="container" id="lista"></div>
