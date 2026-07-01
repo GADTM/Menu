@@ -52,10 +52,15 @@ button:hover{
   padding:15px;
   margin:15px;
   border-radius:10px;
+  border-left:5px solid #3692E3;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
   white-space:pre-line;
   font-size:15px;
 }
+
+.card div{
+  line-height:1.4;
+  }
 
 /* LINK */
 .card a{
@@ -84,9 +89,9 @@ button:hover{
 <body>
 
 <header>
-  📡 CLUSTER de Actividades<br>
+  📡 CLUSTER GADTM<br>
   <span style="font-size:18px;font-weight:normal;color:black;">
-    Fuente HamRadioQSO (Red Multiprotocolo Delta Victor)
+    Actividades de HamRadio QSO y eHamlog
   </span>
 </header>
 
@@ -123,12 +128,14 @@ async function cargar(){
     div.className = "card";
 
     div.innerHTML = `
-📡 NUEVA ACTIVIDAD
+	<div style="font-weight:bold; font-size:18px; margin-bottom:8px;">
+	📡 Actividad
+	</div>
 
-${m.texto}
+	<div>${m.texto}</div>
 
-<a href="${m.link}" target="_blank">🔗 Ver en Telegram</a>
-`;
+	<a href="${m.link}" target="_blank">🔗 Ver en Telegram</a>
+	`;
 
     cont.appendChild(div);
   });
