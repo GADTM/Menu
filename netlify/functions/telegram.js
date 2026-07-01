@@ -21,30 +21,32 @@ exports.handler = async () => {
 
       const bloques = html.split('tgme_widget_message_wrap');
 
-      for (const bloque of bloques) {
+    for (const bloque of bloques) {
 
-        const idMatch = bloque.match(new RegExp(`data-post="${canal}\/(\\d+)"`));
-        const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
-        const linkMatch = bloque.match(/href="(https:\/\/t\.me\/[^"]+)"/);
+		const idMatch = bloque.match(/data-post="([^\/]+)\/(\d+)"/);
+		const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
+		const linkMatch = bloque.match(/href="(https:\/\/t\.me\/[^"]+)"/);
 
-        if (!idMatch || !textMatch) continue;
+		if (!idMatch || !textMatch) continue;
 
-        let texto = textMatch[1]
-          .replace(/<br\s*\/?>/g, "\n")
-          .replace(/<[^>]*>/g, "")
-          .replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "")
-          .replace(/NUEVA ACTIVIDAD/gi, "")
-          .trim();
+		const canal = idMatch[1];
+		const id = idMatch[2];
 
-        mensajes.push({
-          canal,
-          id: idMatch[1],
-          texto,
-          link: linkMatch ? linkMatch[1] : null
-        });
-      }
-    }
+		let texto = textMatch[1]
+			.replace(/<br\s*\/?>/g, "\n")
+			.replace(/<[^>]*>/g, "")
+			.replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "")
+			.replace(/NUEVA ACTIVIDAD/gi, "")
+			.trim();
 
+		mensajes.push({
+		canal,
+		id,
+		texto,
+		link: linkMatch ? linkMatch[1] : null
+	});
+	}
+    
     // ordenar (más nuevos primero)
     mensajes.reverse();
 
