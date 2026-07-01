@@ -1,6 +1,8 @@
 exports.handler = async () => {
   try {
-    const response = await fetch("https://t.me/s/HamRadioQSO", {
+    const canal = "clientepeanutnews";
+
+    const response = await fetch(`https://t.me/s/${canal}`, {
       headers: {
         "User-Agent": "Mozilla/5.0"
       }
@@ -14,20 +16,21 @@ exports.handler = async () => {
 
     for (const bloque of bloques) {
 
-      const idMatch = bloque.match(/data-post="HamRadioQSO\/(\d+)"/);
+      const idMatch = bloque.match(new RegExp(`data-post="${canal}\/(\\d+)"`));
       const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
-      const linkMatch = bloque.match(/href="(https:\/\/t\.me\/HamRadioQSO\/\d+)"/);
+      const linkMatch = bloque.match(/href="(https:\/\/t\.me\/[^"]+)"/);
 
       if (!idMatch || !textMatch) continue;
 
-     let texto = textMatch[1]
-		.replace(/<br\s*\/?>/g, "\n")
-		.replace(/<[^>]*>/g, "")
-		.replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "") // 👈 ELIMINA DUPLICADO
-		.replace(/NUEVA ACTIVIDAD/gi, "") // fallback
-		.trim();
+      let texto = textMatch[1]
+        .replace(/<br\s*\/?>/g, "\n")
+        .replace(/<[^>]*>/g, "")
+        .replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "")
+        .replace(/NUEVA ACTIVIDAD/gi, "")
+        .trim();
 
       mensajes.push({
+        canal,
         id: idMatch[1],
         texto,
         link: linkMatch ? linkMatch[1] : null
