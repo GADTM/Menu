@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- WEB/PAGINA que une todas las app creadas - Fernando LW3DFA 08/2025 -->
+<!-- Version 2.0 - 05/2026 -->
+  <meta charset="UTF-8">
+  <title>GADTM</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(0deg, rgba(183, 213, 232, 1) 0%, rgba(54, 146, 227, 1) 100%);
+      color: black;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center; /* centra verticalmente */
+      gap: 10px;           /* separación entre logo y texto */
+   }
+
+    .logo img {
+      height: 40px;
+    }
+
+	.logo-text {
+		display: flex;
+		flex-direction: column; /* pone una línea abajo de la otra */
+		font-size: 18px;
+	}
+
+	.logo-text .linea2 {
+		font-weight: bold;
+	}
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Botones con icono arriba y texto debajo */
+    nav button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      gap: 4px;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #3692E3;
+      color: #fff;
+      box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    nav button:hover {
+      background-color: #004c99;
+      transform: scale(1.05);
+    }
+
+    nav button .icon {
+      font-size: 22px;
+    }
+
+    nav button .text {
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    main {
+      flex: 1;
+      background: linear-gradient(0deg, rgba(54, 146, 227, 1) 0%, rgba(183, 213, 232, 1) 100%);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .section {
+      display: none;
+      height: 100%;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .section iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #b7d5e8;
+      font-size: 14px;
+    }
+
+    .footer img {
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+ <div class="logo">
+  <img src="logo-gadtm.png" alt="Logo">
+  <div class="logo-text">
+    <span class="linea1">Grupo de Actividades Digitales</span>
+    <span class="linea2">"Los Tres Mosqueteros"</span>
+  </div>
+</div>
+  <nav>
+    <button onclick="showSection('actividades')">
+      <span class="icon">📅</span>
+      <span class="text">Actividades</span>
+    </button>
+    <button onclick="showSection('descarga')">
+      <span class="icon">📥</span>
+      <span class="text">QSL´s</span>
+    </button>
+	<button onclick="window.open('https://lu6hmt.dyndns.org/Sistema/home.aspx', '_blank')">
+      <span class="icon">🏆</span>
+      <span class="text">Diplomas</span>
+    </button>
+	<button onclick="location.href='cluster.html'">
+    <span class="icon">📢</span>
+    <span class="text">Cluster</span>
+	</button>
+	<button onclick="window.open('https://qslpro2.netlify.app/', '_blank')">
+      <span class="icon">📨</span>
+      <span class="text">QSLPro</span>
+    </button>
+	<button onclick="showSection('genadif')">
+      <span class="icon">📝</span>
+      <span class="text">ADIF</span>
+    </button>
+    <button onclick="window.open('https://gadtm.foroactivo.com', '_blank')">
+      <span class="icon">🗨️</span>
+      <span class="text">Foro</span>
+    </button>
+	<button onclick="window.open('http://validarqso.free.nf', '_blank')">
+      <span class="icon">📌</span>
+      <span class="text">ValidarQSO</span>
+    </button>	
+	<button onclick="showSection('escudo')">
+      <span class="icon">🛡️</span>
+      <span class="text">Escudo</span>
+    </button>
+	<button onclick="showSection('qsos')">
+      <span class="icon">📝</span>
+      <span class="text">QSO´s</span>
+    </button>
+  </nav>
+</header>
+
+<main>
+  <div id="actividades" class="section">
+    <iframe src="https://actividades-gadtm.netlify.app/"></iframe>
+  </div>
+
+  <div id="descarga" class="section active">
+    <iframe src="https://qslgadtm.netlify.app/"></iframe>
+  </div>
+  
+  <div id="genadif" class="section">
+    <iframe src="https://genadif.netlify.app/"></iframe>
+  </div>
+
+  <div id="escudo" class="section">
+    <iframe src="https://escudo-gadtm.netlify.app/"></iframe>
+  </div>
+
+  <div id="qsos" class="section">
+    <iframe src="https://gadtmqrz.netlify.app/"></iframe>
+  </div>
+</main>
+
+<div class="footer">
+  Grupo de Actividades Digitales GADTM (© LW3DFA 
+  <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg" alt="Bandera Argentina" width="20"> 2025 v2.0)
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
