@@ -20,12 +20,14 @@ exports.handler = async () => {
 
       if (!idMatch || !textMatch) continue;
 
-     let texto = textMatch[1]
-		.replace(/<br\s*\/?>/g, "\n")
-		.replace(/<[^>]*>/g, "")
-		.replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "") // 👈 ELIMINA DUPLICADO
-		.replace(/NUEVA ACTIVIDAD/gi, "") // fallback
-		.trim();
+    let texto = textMatch[1]
+  .replace(/<br\s*\/?>/g, "\n")
+  .replace(/<[^>]*>/g, "")
+  .replace(/\n\s*\n\s*\n/g, "\n\n")  // reduce triples saltos
+  .replace(/\n{3,}/g, "\n\n")        // limpia exceso de líneas
+  .replace(/🎙️\s*NUEVA ACTIVIDAD\s*🎙️/gi, "")
+  .replace(/NUEVA ACTIVIDAD/gi, "")
+  .trim();
 
       mensajes.push({
         id: idMatch[1],
