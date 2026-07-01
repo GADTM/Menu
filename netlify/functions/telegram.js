@@ -8,38 +8,36 @@ exports.handler = async () => {
 
     const html = await response.text();
 
-    // Separar por mensajes reales
     const bloques = html.split('tgme_widget_message_wrap');
 
     const mensajes = [];
 
-    bloques.forEach((bloque, index) => {
+    for (const bloque of bloques) {
 
       const idMatch = bloque.match(/data-post="HamRadioQSO\/(\d+)"/);
-      const textoMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
-      const linkMatch = bloque.match(/href="https:\/\/t\.me\/HamRadioQSO\/\d+"/);
+      const textMatch = bloque.match(/tgme_widget_message_text js-message_text[^>]*>([\s\S]*?)<\/div>/);
+      const linkMatch = bloque.match(/href="(https:\/\/t\.me\/HamRadioQSO\/\d+)"/);
 
-      if (idMatch && textoMatch) {
+      if (!idMatch || !textMatch) continue;
 
-        const texto = textoMatch[1]
-          .replace(/<br\s*\/?>/g, "\n")
-          .replace(/<[^>]*>/g, "")
-          .trim();
+      let texto = textMatch[1]
+        .replace(/<br\s*\/?>/g, "\n")
+        .replace(/<[^>]*>/g, "")
+        .trim();
 
-        mensajes.push({
-          id: idMatch[1],
-          texto,
-          link: linkMatch ? linkMatch[0].match(/href="([^"]+)"/)[1] : null
-        });
-      }
-    });
+      mensajes.push({
+        id: idMatch[1],
+        texto,
+        link: linkMatch ? linkMatch[1] : null
+      });
+    }
 
     return {
       statusCode: 200,
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(mensajes.reverse().slice(0, 10), null, 2)
+      body: JSON.stringify(mensajes.reverse().slice(0, 15))
     };
 
   } catch (err) {
