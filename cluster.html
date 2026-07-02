@@ -54,7 +54,7 @@ button:hover{
   border-radius:10px;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
   white-space:pre-line;
-  font-size:18px;
+  font-size:16px;
   line-height:1.35;    /* 👈 CLAVE: compacta el texto */
 }
 
@@ -132,15 +132,12 @@ async function cargar(){
     div.className = "card";
 
     div.innerHTML = `
-<div style="font-weight:bold; font-size:18px; margin-bottom:8px;">
-📡 Actividad
-</div>
-
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <strong>📡 Actividad</strong>
+    </div>
 <div>${m.texto}</div>
-
 <a href="${m.link}" target="_blank">🔗 Ver en Telegram</a>
 `;
-
     cont.appendChild(div);
   });
 }
